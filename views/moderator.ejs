@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Модераторская панель</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #f6d365, #fda085);
+            color: #333;
+        }
+
+        header {
+            background: #ff7e5f;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover {
+            color: #f6d365;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 2.5rem;
+            color: #fff;
+        }
+
+        h2 {
+            text-align: center;
+            color: #fff;
+        }
+
+        .recipes-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .recipe-card {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fdfdfd;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .recipe-card h3 {
+            margin: 0;
+            color: #ff7e5f;
+        }
+
+        .recipe-card p {
+            margin: 5px 0;
+        }
+
+        .recipe-card strong {
+            color: #555;
+        }
+
+        .recipe-card form {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #ff7e5f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #f6d365;
+        }
+
+        /* Зеленая кнопка */
+        .btn-green {
+            background-color: #4CAF50; /* Зеленый цвет */
+        }
+
+        .btn-green:hover {
+            background-color: #45a049; /* Более темный оттенок зеленого */
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .recipe-card {
+                padding: 10px;
+            }
+
+            button {
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Главная</a>
+            <a href="/profile">Профиль</a>
+        </nav>
+    </header>
+
+    <h1>Модераторская панель</h1>
+
+    <div class="recipes-container">
+        <h2>Все рецепты</h2>
+        <% if (recipes.length > 0) { %>
+            <% recipes.forEach(recipe => { %>
+                <div class="recipe-card">
+                    <h3><%= recipe.name %></h3>
+                    <p><strong>Категория:</strong> <%= recipe.category %></p>
+                    <p><strong>Описание:</strong> <%= recipe.description %></p>
+                    <p><strong>Ингредиенты:</strong> <%= recipe.ingredients %></p>
+                    <p><strong>Шаги:</strong> <%= recipe.steps %></p>
+                    <p><strong>Дата создания:</strong> <%= new Date(recipe.createdAt).toLocaleDateString() %></p>
+
+                    <form action="/moderator/recipe/<%= recipe.id %>/delete" method="POST">
+                        <button type="submit">Кринж</button>
+                    </form>
+
+                    <form action="/moderator/recipe/<%= recipe.id %>/add-to-homepage" method="POST">
+                        <button type="submit" class="btn-green">База</button>
+                    </form>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>Рецептов для модерации пока нет.</p>
+        <% } %>
+    </div>
+</body>
+</html>

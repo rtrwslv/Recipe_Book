@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Упси-вупси!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #f6d365, #fda085);
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin: 20px 0;
+        }
+
+        .countdown {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: underline;
+            font-size: 1.2rem;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: #ff7e5f;
+        }
+    </style>
+    <script>
+        let countdown = 5; // Время до перенаправления (в секундах)
+
+        function updateCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            countdownElement.textContent = countdown;
+
+            if (countdown <= 0) {
+                window.location.href = '/'; // Перенаправление на главную страницу
+            } else {
+                countdown--;
+                setTimeout(updateCountdown, 1000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', updateCountdown);
+    </script>
+</head>
+<body>
+    <h1>Упси-вупси!</h1>
+    <p>Кажется, вам сюда не надо.</p>
+    <p class="countdown">Перенаправление через <span id="countdown">5</span> секунд...</p>
+    <p>Если ничего не произошло, <a href="/">нажмите сюда</a>, чтобы вернуться на главную.</p>
+</body>
+</html>
